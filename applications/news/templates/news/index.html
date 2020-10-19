@@ -1,88 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-   <title>{{ title }}</title>
-</head>
+{% extends 'base.html' %}
 
-
-<body style="background:#2348">
-
-<!--Навбар-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="{% url 'home' %}">JapanBlog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Главная<span class="sr-only">(current)</span></a></li>
-      <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Добавить новость<span class="sr-only">(current)</span></a></li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+{% block title %}
+  {{ title }} :: {{ block.super }}
+{% endblock %}
 
 <!--Список новостей-->
-<div class="container mt-3">
-  <div class="row">
-    <div class="col-md-9">
-      <h1>{{ title }}</h1>
-      {% for item in news %}
-      <div class="card mb-3">
-        <div class="card-header">
-          Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
-        </div>
-        <div class="card-body">
-          <div class="media">
-            {% if item.photo %}
-            <img src="{{ item.photo.url }}" alt="photo" width="350" class="mr-3">
-            {% else %}
-            <img src="https://picsum.photos/id/1011/350/235/?blur alt="" class="mr-3">
-            {% endif %}
-            <div class="media-body">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <p class="card-text">{{ item.content|safe|linebreaks|truncatewords:40 }}</p>
-              <a href="#" class="btn btn-primary">Узнать больше</a>
-            </div>
-          </div>
-        </div>
-        <div class="card-footer text-muted">
-          Дата публикации: {{ item.created_at|date:"Y-m-d H:i" }}
-          <br>
-          {{ item.created_at|timesince }}
+{% block content %}
+<div class="col-md-9">
+  <h1>{{ title }}</h1>
+  {% for item in news %}
+  <div class="card mb-3">
+    <div class="card-header">
+      Категория: <a href="{% url 'category' item.category.pk %}">{{ item.category }}</a>
+    </div>
+    <div class="card-body">
+      <div class="media">
+        {% if item.photo %}
+        <img src="{{ item.photo.url }}" alt="photo" width="350" class="mr-3">
+        {% else %}
+        <img src="https://picsum.photos/id/1011/350/235/?blur alt="" class="mr-3">
+        {% endif %}
+        <div class="media-body">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-text">{{ item.content|safe|linebreaks|truncatewords:40 }}</p>
+          <a href="#" class="btn btn-primary">Узнать больше</a>
         </div>
       </div>
-      {% empty %}
-      mistake in news
-      {% endfor %}
     </div>
-    <!--Категория-->
-    <div class="col-md-3 mt-2">
+    <div class="card-footer text-muted">
+      Дата публикации: {{ item.created_at|date:"Y-m-d H:i" }}
       <br>
-      <br>
-      <div class="list-group">
-        {% for item in categories %}
-        <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>
-        {% endfor %}
-      </div>
+      {{ item.created_at|timesince }}
     </div>
-    <!--Список новостей-->
+  </div>
+  {% empty %}
+  mistake in news
+  {% endfor %}
+</div>
+{% endblock %}
 
+<!--Категория-->
+{% block sidebar %}
+<div class="col-md-3 mt-2">
+  <br>
+  <br>
+  <div class="list-group">
+    {% for item in categories %}
+    <a href="{% url 'category' item.pk %}" class="list-group-item list-group-item-action">{{ item.title }}</a>
+    {% endfor %}
   </div>
 </div>
+{% endblock %}
 
-
-
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
-</html>
