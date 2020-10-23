@@ -1,6 +1,23 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView
+
 from .models import News, Category
 from .forms import NewsForm
+
+
+class HomeNews(ListView):
+    model = News
+    template_name = 'news/index.html'
+    context_object_name = 'news'
+    # extra_context = {'title': 'Главная'} для статических файлов
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Главная страница'
+        return context
+
+    def get_queryset(self):
+        return News.objects.filter(is_published=True)
 
 
 def index(request):
@@ -20,6 +37,7 @@ def get_category(request, category_id):
         'category': category,
     }
     return render(request, 'news/category.html', context=context)
+
 
 def view_news(request, news_id):
     # news_item = News.objects.get(pk=news_id)
