@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.contrib import admin
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '7dpyi41vnmdinlt#rwsfzg=p2l^$dymp47+v=xu(=^_obanc=l'
@@ -108,3 +110,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+admin.sites.AdminSite.site_header = "Админка BlogJapan"
