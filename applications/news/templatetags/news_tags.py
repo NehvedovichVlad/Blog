@@ -12,6 +12,6 @@ def get_categories():
 
 @register.inclusion_tag('news/list_categories.html')
 def show_categories():
-    #categories = Category.objects.annotate(cnt=Count('get_news', filter=F('news__is_published'))).filter(cnt__gt=0)
-    categories = Category.objects.annotate(cnt=Count('get_news')).filter(cnt__gt=0)
+    categories = Category.objects.annotate(cnt=Count('get_news', filter=F('get_news__is_published'))).filter(cnt__gt=0)
+    #categories = Category.objects.annotate(cnt=Count('get_news')).filter(cnt__gt=0)
     return {"categories": categories}
