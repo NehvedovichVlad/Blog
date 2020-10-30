@@ -10,11 +10,11 @@
          <li class="nav-item active"><a class="nav-link" href="{% url 'home' %}">Главная<span class="sr-only">(current)</span></a></li>
 {% if request.user.is_authenticated %}
          <li class="nav-item active"><a class="nav-link" href="{% url 'add_news' %}">Добавить новость<span class="sr-only">(current)</span></a></li>
+      {% endif %}
       </ul>
-{% endif %}
-      <form class="form-inline my-2 my-lg-0">
-         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+
+      <span class="navbar-text">
+         <a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Логин</a>
+      </span>
    </div>
 </nav>

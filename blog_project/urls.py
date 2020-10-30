@@ -8,6 +8,7 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('applications.news.urls')),
+    path('', include('applications.register.urls')),
 ]
 
 if settings.DEBUG:

@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     # -------------------------------------------------
     'debug_toolbar',
     'applications.news.apps.NewsConfig',
+    'applications.register.apps.RegisterConfig',
 ]
 
 MIDDLEWARE = [
