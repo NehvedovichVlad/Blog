@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+
+from applications.register.forms import UserRegisterForm
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Вы успешно зарегистрировались')
@@ -14,7 +15,7 @@ def register(request):
         else:
             messages.error(request, 'Ошибка регистрации')
     else:
-        form = UserCreationForm()
+        form = UserRegisterForm()
     return render(request, 'register/register.html', {'form': form})
 
 

@@ -8,13 +8,14 @@
 {% block content %}
 
 <h1>Регистрация</h1>
+<div class="card-header">
+   <form method="post">
+      {% csrf_token %}
 
-<form method="post">
-   {% csrf_token %}
-   {{ form.as_p }}
-   <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
-</form>
-
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
+   </form>
+</div>
 {% endblock %}
 
 <!--Категория-->
