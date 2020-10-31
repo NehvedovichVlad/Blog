@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # -------------------------------------------------
     'debug_toolbar',
+    'ckeditor',
+    'ckeditor_uploader',
     'applications.news.apps.NewsConfig',
     'applications.register.apps.RegisterConfig',
 ]
@@ -114,3 +116,5 @@ INTERNAL_IPS = ['127.0.0.1']
 
 
 admin.sites.AdminSite.site_header = "Админка BlogJapan"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

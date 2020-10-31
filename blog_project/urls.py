@@ -7,6 +7,7 @@ import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('applications.news.urls')),
     path('', include('applications.register.urls')),
 ]

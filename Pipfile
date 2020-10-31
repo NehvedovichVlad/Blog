@@ -10,6 +10,7 @@ django = "*"
 pillow = "*"
 dj-database-url = "*"
 django-debug-toolbar = "*"
+django-ckeditor = "*"
 
 [requires]
 python_version = "3.8"
