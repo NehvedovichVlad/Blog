@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 
 from django.contrib import messages
 from django.contrib.auth import login, logout
-from applications.register.forms import UserRegisterForm, UserLoginForm
-
+from applications.register.forms import UserRegisterForm, UserLoginForm, ContactForm
+from django.core.mail import send_mail
 
 def register(request):
     if request.method == 'POST':
@@ -35,3 +35,20 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login') 
+
+
+def contact_mail(request):
+    """Необходима для формы обратной связи"""
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data[
+                'content'], 'settings@mail.ru', ['another@mail.ru'], fail_silently=True)
+            if mail:
+                messages.success(request, 'Письмо отправленно')
+                return redirect('contact')
+        else:
+            messages.error(request, 'Ошибка отправки')
+    else:
+        form = ContactForm()
+    return render(request, 'register/register.html', {'form': form})
