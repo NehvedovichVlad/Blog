@@ -10,6 +10,8 @@ urlpatterns = [
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('applications.news.urls')),
     path('', include('applications.register.urls')),
+    path('', include('applications.weather.urls')),
+
 ]
 
 if settings.DEBUG:
