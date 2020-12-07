@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Погода в Японии :: {{ block.super }}
+{% endblock %}
+
+<!--Список новостей-->
+{% block content %}
+
+<div class="col-6 offset-2">
+  <h1>Погода в Японии</h1>
+  <div class="alert alert-success">
+    <b>Город: </b> {{ info.city }}<br>
+    <b>Температура: </b>{{ info.temp }}<sup> O </sup><br>
+    <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Погода" class="img-thumbnail">
+  </div>
+</div>
+
+{% endblock %}
+
