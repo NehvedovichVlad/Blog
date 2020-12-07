@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Погода в Японии :: {{ block.super }}
+{% endblock %}
+
+<!--Список новостей-->
+{% block sidebar %}
+
+<div class="col-12  float-left">
+   <h1>Посмотреть погоду</h1>
+   <div class="alert alert-success">
+      <b>Город: </b> {{ info.city }}<br>
+      <b>Температура: </b>{{ info.temp }}<sup> O </sup><br>
+      <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Погода" class="img-thumbnail">
+   </div>
+</div>
+{% endblock %}
+{% block content %}
+
+<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+   <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+   </ol>
+   {% for i in img %}
+   <div class="carousel-inner">
+      <div class="carousel-item active">
+         <img src="D:\projects\Blog\applications\weather\static\image\{{img.Tokyo}}.jpg" class="d-block w-100" alt="...">
+         <div class="carousel-caption d-none d-md-block">
+            <h5>First slide label</h5>
+            <p>{{ img.i }}</p>
+         </div>
+      </div>
+{% endfor %}
+   </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+   <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+   <span class="carousel-control-next-icon" aria-hidden="true"></span>
+   <span class="sr-only">Next</span>
+</a>
+</div>
+
+<div class="col-8 ">
+   <h1>Топ 10 городов Японии</h1>
+   <p>1. Токио (Tokyo)</p>
+   <p>2. Осака (Osaka)</p>
+   <p>3. Нара (Nara)</p>
+   <p>4. Нагано (Nagano)</p>
+   <p>5. Саппоро (Sapporo)</p>
+   <p>6. Нагасаки (Nagasaki)</p>
+   <p>7. Канадзава (Kanazawa)</p>
+   8. Никко (Nikko)</p>
+   <p>9. Хиросима (Hiroshima)</p>
+   <p>10. Такаяма (Takayama)</p>
+</div>
+
+{% endblock %}
+

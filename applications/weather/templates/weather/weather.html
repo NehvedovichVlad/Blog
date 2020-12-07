@@ -7,13 +7,32 @@
 <!--Список новостей-->
 {% block content %}
 
-<div class="col-6 offset-2">
+<div class="col-6  float-left">
   <h1>Погода в Японии</h1>
+  {% for info in all_info %}
   <div class="alert alert-success">
     <b>Город: </b> {{ info.city }}<br>
     <b>Температура: </b>{{ info.temp }}<sup> O </sup><br>
     <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Погода" class="img-thumbnail">
   </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="col-12 ">
+<h1>Топ 10 городов Японии</h1>
+<p>1. Токио (Tokyo)</p>
+<p>2. Осака (Osaka)</p>
+<p>3. Нара (Nara)</p>
+<p>4. Нагано (Nagano)</p>
+<p>5. Саппоро (Sapporo)</p>
+<p>6. Нагасаки (Nagasaki)</p>
+<p>7. Канадзава (Kanazawa)</p>
+8. Никко (Nikko)</p>
+<p>9. Хиросима (Hiroshima)</p>
+<p>10. Такаяма (Takayama)</p>
 </div>
 
 {% endblock %}
