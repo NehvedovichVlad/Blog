@@ -1,15 +1,22 @@
 from django.shortcuts import render
 import requests
 
-from applications.weather.models import City
+from .forms import CityForm
+from .models import City
 
 
 def find_weather(request):
     appid = '1547f56cb0f7d14c2d8fee4263efc7a6'
     url = "https://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=" + appid
 
-    all_cities = []
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        form.save()
+
+    form = CityForm()
+
     cities = City.objects.all()
+    all_cities = []
 
     for city in cities:
         res = requests.get(url.format(city.name)).json()
@@ -20,21 +27,22 @@ def find_weather(request):
         }
         all_cities.append(city_info)
 
-
-    image = {
-        'Tokyo': 'Tokyo',
-        'Osaka': 'Osaka',
-        'Nara': 'Nara',
-        'Nagano': 'Nagano',
-        'Sapporo': 'Sapporo',
-        'Nagasaki': 'Nagasaki',
-        'Kanazawa': 'Kanazawa',
-        'Nikko': 'Nikko',
-        'Hiroshima': 'Hiroshima',
-        'Takayama': 'Takayama'
-    }
-
     context = {
         'all_info': all_cities,
+        'form': form
     }
     return render(request, "weather/weather.html", context)
+
+
+    # image = {
+    #     'Tokyo': 'Tokyo',
+    #     'Osaka': 'Osaka',
+    #     'Nara': 'Nara',
+    #     'Nagano': 'Nagano',
+    #     'Sapporo': 'Sapporo',
+    #     'Nagasaki': 'Nagasaki',
+    #     'Kanazawa': 'Kanazawa',
+    #     'Nikko': 'Nikko',
+    #     'Hiroshima': 'Hiroshima',
+    #     'Takayama': 'Takayama'
+    # }

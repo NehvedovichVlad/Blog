@@ -6,6 +6,14 @@
 
 <!--Список новостей-->
 {% block content %}
+<div class="col-6  float-left">
+<form action="" method="post">
+  {% csrf_token %}
+  <label for="city">Город</label>
+  {{ form.name }}
+  <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+</form>
+</div>
 
 <div class="col-6  float-left">
   <h1>Погода в Японии</h1>
