@@ -16,6 +16,8 @@ gunicorn = "*"
 whitenoise = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+django-storages = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"
