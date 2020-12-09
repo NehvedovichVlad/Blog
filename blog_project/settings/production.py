@@ -115,14 +115,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#S3 BUCKETS CONFIG
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID ')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-# AWS_SECRET_ACCESS_KEY = '*****************'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 
 
 STATIC_URL = '/static/'
@@ -204,3 +197,11 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+#S3 BUCKETS CONFIG
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID ')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+# AWS_SECRET_ACCESS_KEY = '*****************'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
