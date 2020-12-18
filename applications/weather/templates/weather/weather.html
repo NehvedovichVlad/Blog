@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Погода в Японии :: {{ block.super }}
+Погода в Японии :: {{ block.super }}
 {% endblock %}
 
 <!--Список новостей-->
 {% block content %}
 <div class="col-6  float-left">
-<form action="" method="post">
-  {% csrf_token %}
-  <label for="city">Город</label>
-  {{ form.name }}
-  <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
-</form>
+  <form action="" method="post">
+    {% csrf_token %}
+    <label for="city">Город</label>
+    {{ form.name }}
+    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+  </form>
 </div>
 
-<div class="col-6  float-left">
+<div class="col-6  float-right">
   <h1>Погода в Японии</h1>
   {% for info in all_info %}
   <div class="alert alert-success">
-    <b>Город: </b> {{ info.city }}<br>
-    <b>Температура: </b>{{ info.temp }}<sup> O </sup><br>
     <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="Погода" class="img-thumbnail">
+    <div class="float-left ml-3 mr-5"><b>Город: </b> {{ info.city }}<br>
+      <b>Температура: </b>{{ info.temp }}<sup> O </sup><br>
+    </div>
+    <div class="media-right">
+      <a href='{% url 'delete_city' info.city %}'>
+      <button class="delete"> </button>
+      </a>
+    </div>
   </div>
   {% endfor %}
 </div>
@@ -30,17 +36,17 @@
 
 {% block sidebar %}
 <div class="col-12 ">
-<h1>Топ 10 городов Японии</h1>
-<p>1. Токио (Tokyo)</p>
-<p>2. Осака (Osaka)</p>
-<p>3. Нара (Nara)</p>
-<p>4. Нагано (Nagano)</p>
-<p>5. Саппоро (Sapporo)</p>
-<p>6. Нагасаки (Nagasaki)</p>
-<p>7. Канадзава (Kanazawa)</p>
-8. Никко (Nikko)</p>
-<p>9. Хиросима (Hiroshima)</p>
-<p>10. Такаяма (Takayama)</p>
+  <h1>Топ 10 городов Японии</h1>
+  <p>1. Токио (Tokyo)</p>
+  <p>2. Осака (Osaka)</p>
+  <p>3. Нара (Nara)</p>
+  <p>4. Нагано (Nagano)</p>
+  <p>5. Саппоро (Sapporo)</p>
+  <p>6. Нагасаки (Nagasaki)</p>
+  <p>7. Канадзава (Kanazawa)</p>
+  8. Никко (Nikko)</p>
+  <p>9. Хиросима (Hiroshima)</p>
+  <p>10. Такаяма (Takayama)</p>
 </div>
 
 {% endblock %}
