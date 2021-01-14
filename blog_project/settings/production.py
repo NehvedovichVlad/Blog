@@ -3,7 +3,6 @@ from pathlib import Path
 
 import dj_database_url
 
-
 DB_NAME = os.environ.get('DB_NAME')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
 DB_HOST = os.environ.get('DB_HOST')
@@ -12,7 +11,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.contrib import admin
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'applications.news.apps.NewsConfig',
     'applications.register.apps.RegisterConfig',
+    'applications.weather.apps.WeatherConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -103,8 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -114,6 +114,7 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
 
 
 
@@ -127,7 +128,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS = ['127.0.0.1']
-
 
 admin.sites.AdminSite.site_header = "Админка BlogJapan"
 
@@ -180,7 +180,7 @@ CKEDITOR_CONFIGS = {
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
         'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
             # your extra plugins here
             'div',
             'autolink',
@@ -197,3 +197,12 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID ')
+# AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+# AWS_QUERYSTRING_AUTH = False
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
