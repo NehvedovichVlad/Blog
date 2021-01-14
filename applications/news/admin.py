@@ -15,12 +15,12 @@ class NewsAdminForm(forms.ModelForm):
 
 class NewsAdmin(admin.ModelAdmin):
     form = NewsAdminForm
-    list_display = ('id', 'title', 'category', 'created_at', 'update_at', 'is_published', 'get_photo')
+    list_display = ('id', 'title', 'category', 'created_at', 'update_at', 'is_published', 'get_photo', 'avtor')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'category')
-    fields = ('title', 'category', 'content', 'photo', 'get_photo', 'is_published', 'views', 'created_at', 'update_at')
+    fields = ('title', 'category', 'content', 'photo', 'get_photo', 'is_published', 'views', 'created_at', 'update_at', 'avtor')
     readonly_fields = ('get_photo', 'views', 'created_at', 'update_at', )
     save_on_top = True
 
