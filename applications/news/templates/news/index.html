@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  {{ title }} :: {{ block.super }}
+{{ title }} :: {{ block.super }}
 {% endblock %}
 
 <!--Список новостей-->
@@ -29,11 +29,16 @@
     Дата публикации: {{ item.created_at|date:"Y-m-d H:i" }}
     <br>
     {{ item.created_at|timesince }}
+    {% if item.avtor %}
+    <p><b>Автор:</b> <mark> {{ item.avtor }}</mark></p>
+    {% else %}
+    <p><b>Автор:</b> <mark> Админ </mark></p>
+    {% endif %}
   </div>
 </div>
-  {% empty %}
-  mistake in news
-  {% endfor %}
+{% empty %}
+mistake in news
+{% endfor %}
 {% endblock %}
 
 <!--Категория-->
