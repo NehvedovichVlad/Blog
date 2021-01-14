@@ -62,7 +62,7 @@ def find_weather(request):
 def delete_city(request, city_name):
     City.objects.get(name=city_name).delete()
     
-    return  redirect('weather')
+    return redirect('weather')
 
     # image = {
     #     'Tokyo': 'Tokyo',
