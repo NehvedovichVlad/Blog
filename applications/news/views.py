@@ -1,3 +1,4 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -47,12 +48,12 @@ class ViewNews(DetailView):
     # pk_url_kwarg = 'news_id'
 
 
-class CreateNews(LoginRequiredMixin, CreateView):
+class CreateNews(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = NewsForm
     template_name = 'news/add_news.html'
-    # success_url = reverse_lazy('home') можно использовать выместо get_absolute_url
-    login_url = '/admin/'
-
+    success_url = reverse_lazy('home') #можно использовать выместо get_absolute_url
+    login_url = '/admin/' # перенаправляет не харегистрированного пользователя или использовать raise_exception = True
+    success_message = 'Ваш пост создан и добавится после модерации Admin'
 
 # def get_category(request, category_id):
 #     news = News.objects.filter(category_id=category_id)
