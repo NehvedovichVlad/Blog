@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap %}
+
 {% block title %}
 {{ title }} :: {{ block.super }}
 {% endblock %}
@@ -44,8 +44,9 @@ mistake in news
 <!--Категория-->
 {% block sidebar %}
 
-<form class="form-inline" method="get">
-  {{ filter }}
+<form action="{% url 'search' %}" class="form-inline" method="get">
+  <input type="text" name="s" placeholder="Search">
+  <input type="submit" value="Search">
   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 

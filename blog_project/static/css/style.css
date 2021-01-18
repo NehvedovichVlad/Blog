@@ -5,3 +5,6 @@ body {
 .errorlist {
     color: red;
 }
+.fill-width {
+    width:100%;
+}

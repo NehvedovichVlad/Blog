@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
-from .filters import NewsFilter
 from .models import News, Category
 from .forms import NewsForm
 
@@ -18,8 +17,7 @@ class HomeNews(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['title'] = 'Главная страница'
-        context['filter'] = NewsFilter(self.request.GET, queryset=self.get_queryset())
+        context['title'] = 'Главная страница'
         return context
 
     def get_queryset(self):
@@ -28,7 +26,7 @@ class HomeNews(ListView):
 
 class NewsByCategory(ListView):
     model = News
-    template_name = 'news/index.html'
+    template_name = 'news/news.html'
     context_object_name = 'news'
     allow_empty = False
     paginate_by = 2
@@ -42,12 +40,19 @@ class NewsByCategory(ListView):
         return News.objects.filter(category_id=self.kwargs['category_id'],
                                    is_published=True).select_related('category')
 
-# class NewsSearch(FilterView):
-#     model = News
-#     template_name = 'news/index.html'
-#     context_object_name = 'news'
-#     paginate_by = 2
-#     filterset_classes = NewsFilter
+class NewsSearch(ListView):
+    model = News
+    template_name = 'news/search.html'
+    context_object_name = 'news'
+    paginate_by = 1
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['s'] = f"s={self.request.GET.get('s')}&"
+        return context
+
+    def get_queryset(self):
+        return News.objects.filter(title__icontains=self.request.GET.get('s'))
 
 
 

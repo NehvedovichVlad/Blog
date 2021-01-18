@@ -33,7 +33,6 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'applications.news.apps.NewsConfig',
     'applications.register.apps.RegisterConfig',
-    'django_filters',
     'bootstrapform',
 ]
 
