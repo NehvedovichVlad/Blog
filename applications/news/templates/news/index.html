@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load bootstrap %}
 {% block title %}
 {{ title }} :: {{ block.super }}
 {% endblock %}
@@ -43,5 +43,11 @@ mistake in news
 
 <!--Категория-->
 {% block sidebar %}
+
+<form class="form-inline" method="get">
+  {{ filter }}
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+
 {% include 'inc/_sidebar.html' %}
 {% endblock %}
