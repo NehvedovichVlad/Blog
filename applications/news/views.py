@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django_filters.views import FilterView
 from .models import News, Category
 from .forms import NewsForm
 
@@ -26,7 +26,7 @@ class HomeNews(ListView):
 
 class NewsByCategory(ListView):
     model = News
-    template_name = 'news/index.html'
+    template_name = 'news/news.html'
     context_object_name = 'news'
     allow_empty = False
     paginate_by = 2
@@ -39,6 +39,23 @@ class NewsByCategory(ListView):
     def get_queryset(self):
         return News.objects.filter(category_id=self.kwargs['category_id'],
                                    is_published=True).select_related('category')
+
+class NewsSearch(ListView):
+    model = News
+    template_name = 'news/search.html'
+    context_object_name = 'news'
+    paginate_by = 1
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['s'] = f"s={self.request.GET.get('s')}&"
+        return context
+
+    def get_queryset(self):
+        return News.objects.filter(title__icontains=self.request.GET.get('s'))
+
+
+
 
 
 class ViewNews(DetailView):
@@ -67,8 +84,11 @@ class CreateNews(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 # def view_news(request, news_id):
 #     # news_item = News.objects.get(pk=news_id)
 #     news_item = get_object_or_404(News, pk=news_id)
+#
+#     myFilter = NewsFilter()
 #     context = {
 #         'news_item': news_item,
+#         'myFilter': myFilter,
 #     }
 #     return render(request, 'news/view_news.html', context)
 
