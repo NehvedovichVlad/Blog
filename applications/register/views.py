@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from applications.register.forms import UserRegisterForm, UserLoginForm, ContactForm
@@ -31,7 +31,6 @@ def user_login(request):
         form = UserLoginForm()
     return render(request, 'register/login.html', {'form': form})
 
-
 def user_logout(request):
     logout(request)
     return redirect('login') 
@@ -53,3 +52,6 @@ def contact_mail(request):
         form = ContactForm()
     return render(request, 'register/register.html', {'form': form})
 
+@login_required()
+def profile(request):
+    return render(request, 'register/profile.html')
