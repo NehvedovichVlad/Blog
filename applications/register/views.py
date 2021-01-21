@@ -11,7 +11,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, 'Вы успешно зарегистрировались')
+            messages.success(request, f'Вы успешно зарегистрировались: {user}')
             return redirect('home')
         else:
             messages.error(request, 'Ошибка регистрации')
@@ -52,3 +52,4 @@ def contact_mail(request):
     else:
         form = ContactForm()
     return render(request, 'register/register.html', {'form': form})
+
