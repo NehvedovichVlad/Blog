@@ -13,8 +13,7 @@ class NewsForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 4}),
             'category': forms.Select(attrs={'class': 'form-control'}),
-            'photo': forms.FileInput(attrs={'class': 'form-control',
-                                             'id' : 'input-file'}),
+            'photo': forms.FileInput(attrs={'class': 'form-control', 'id': 'input-file'}),
         }
         
     def clean_title(self):
