@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
-
 {% block title %}
 Регистрация :: {{ block.super }}
 {% endblock %}
 
 <!--Список новостей-->
 {% block content %}
+<div class="container">
+   <div class="row">
+      <div class="col-md-4">
+         <h1>Регистрация</h1>
+         <div class="card-header ">
+            <form method="post">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
+            </form>
+         </div>
+      </div>
+         <div class="col-md-4 ml-4 mt-5">
+            <p><img src="..\static\img\flag.png" width="350" alt="Письма мастера дзен"></p>
+         </div>
+      </div>
+   </div>
 
-<h1>Регистрация</h1>
-<div class="card-header">
-   <form method="post">
-      {% csrf_token %}
 
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-primary btn-block">Регистрация</button>
-   </form>
-</div>
 {% endblock %}
 
 <!--Категория-->

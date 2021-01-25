@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from applications.register.forms import UserRegisterForm, UserLoginForm, ContactForm
@@ -11,7 +11,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            messages.success(request, 'Вы успешно зарегистрировались')
+            messages.success(request, f'Вы успешно зарегистрировались: {user}')
             return redirect('home')
         else:
             messages.error(request, 'Ошибка регистрации')
@@ -30,7 +30,6 @@ def user_login(request):
     else:
         form = UserLoginForm()
     return render(request, 'register/login.html', {'form': form})
-
 
 def user_logout(request):
     logout(request)
@@ -52,3 +51,7 @@ def contact_mail(request):
     else:
         form = ContactForm()
     return render(request, 'register/register.html', {'form': form})
+
+@login_required()
+def profile(request):
+    return render(request, 'register/profile.html')
